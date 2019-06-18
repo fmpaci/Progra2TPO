@@ -11,6 +11,8 @@ public class TestColaDinamica {
 		cola.acolar("mensaje");
 		cola.acolar("completo");
 		
+		cola.acolar("agregado1");
+		cola.acolar("agregado2");
 		while(!cola.colaVacia()) {
 			System.out.println(cola.primero());
 			cola.desacolar();
