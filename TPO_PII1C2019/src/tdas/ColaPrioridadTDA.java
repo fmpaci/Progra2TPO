@@ -20,7 +20,7 @@ public interface ColaPrioridadTDA {
 	/**
 	 * Inicializada y no vacía
 	 * */
-	public void dasacolar();
+	public void desacolar();
 	
 	/**
 	 * Inicializada y no vacía
