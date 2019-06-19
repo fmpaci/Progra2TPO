@@ -129,4 +129,18 @@ public interface AgendaCitasTDA {
 	 * 		@param fecha
 	 * */
 	public ColaTDA turnos (String abogado, String fecha);
+	
+	
+	
+	/**
+	 * Devuelve un conjunto con todas las fechas de citas que tenga un abogado 
+	 *  
+	 * Precondición:
+	 * 		inicializada
+	 * 
+	 * Parámetros: 
+	 * 		@param abogado 
+	 * 
+	 * */
+	public ConjuntoTDA fechas(String abogado);
 }

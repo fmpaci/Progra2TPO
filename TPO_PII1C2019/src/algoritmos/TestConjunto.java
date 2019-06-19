@@ -2,7 +2,7 @@ package algoritmos;
 
 
 public class TestConjunto {
-
+	
 	public static void main(String[] args) {
 		implementaciones.impConjunto conjHandle = new implementaciones.impConjunto();
 		
@@ -12,6 +12,8 @@ public class TestConjunto {
 		conjHandle.agregar("3");
 		conjHandle.agregar("4");
 		conjHandle.agregar("5");
+		
+		
 		
 		System.out.println(conjHandle.elegir());
 		
