@@ -3,7 +3,7 @@ package algoritmos;
 public class TestColaPrioridad {
 
 	public static void main(String[] args) {
-		implementaciones.impColaPrioridad colaP = new implementaciones.impColaPrioridad();
+		implementaciones.ImpColaPrioridad colaP = new implementaciones.ImpColaPrioridad();
 		colaP.inicializar();
 		
 		colaP.acolar("Carlos", "b");
