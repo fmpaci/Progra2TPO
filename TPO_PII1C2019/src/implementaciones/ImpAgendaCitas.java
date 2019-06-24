@@ -78,10 +78,16 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 		// TODO Auto-generated method stub
 
 	}
-
+	
 	@Override
 	public void eliminarAbogado(String abogado) {
 		// TODO Auto-generated method stub
+		NodoAgenda aux = new NodoAgenda();
+		aux = primerAgenda;
+		while(aux.sigAbogado != null & !aux.abogado.equalsIgnoreCase(abogado)) {
+			aux = aux.sigAbogado;
+		}
+		
 
 	}
 
