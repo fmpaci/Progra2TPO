@@ -81,19 +81,27 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 	
 	@Override
 	public void eliminarAbogado(String abogado) {
-		// TODO Auto-generated method stub
 		NodoAgenda aux = new NodoAgenda();
-		aux = primerAgenda;
-		while(aux.sigAbogado != null & !aux.abogado.equalsIgnoreCase(abogado)) {
-			aux = aux.sigAbogado;
+		NodoAgenda auxAnt = new NodoAgenda();
+		aux = primerAgenda.sigAbogado;
+		auxAnt = primerAgenda;
+		if(auxAnt.abogado.equalsIgnoreCase(abogado)) {
+			primerAgenda = aux;
+		}else {
+			while(aux.sigAbogado != null & !aux.abogado.equalsIgnoreCase(abogado)) {
+				auxAnt = aux;
+				aux = aux.sigAbogado;
+			}
+			if(aux.abogado.equalsIgnoreCase(abogado)) {
+				auxAnt.sigAbogado = aux.sigAbogado;
+			}
 		}
-		
 
 	}
 
 	@Override
 	public void eliminarFecha(String abogado, String fecha) {
-		// TODO Auto-generated method stub
+		// TODO TODO!!!
 
 	}
 
@@ -118,6 +126,7 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 	@Override
 	public ConjuntoTDA abogados() {
 		NodoAgenda aux = new NodoAgenda();
+		
 		ConjuntoTDA conjAbogados = new ImpConjunto();
 		conjAbogados.inicializar();
 		aux = primerAgenda;
@@ -141,3 +150,4 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 	}
 
 }
+

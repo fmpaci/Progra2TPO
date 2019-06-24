@@ -21,7 +21,7 @@ public class TestVariosFPA {
 		citas.agregarNuevoDia("Jose", "hoy", "23/06/2019");
 		citas.agregarNuevoDia("Matias", "hoy", "23/06/2019");
 		
-		
+		citas.eliminarAbogado("pedro");
 		abogados = citas.abogados();
 		
 		while(!abogados.conjuntoVacio()){
