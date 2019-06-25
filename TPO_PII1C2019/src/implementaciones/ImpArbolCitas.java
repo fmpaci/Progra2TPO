@@ -72,14 +72,12 @@ public class ImpArbolCitas implements ArbolCitasTDA {
 
 	@Override
 	public ArbolCitasTDA hijoDerecho() {
-		// TODO Auto-generated method stub
-		return null;
+		return raiz.hijoDer;
 	}
 
 	@Override
 	public ArbolCitasTDA hijoIzquierdo() {
-		// TODO Auto-generated method stub
-		return null;
+		return raiz.hijoIzq;
 	}
 
 	@Override
