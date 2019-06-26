@@ -1,10 +1,11 @@
 package algoritmos;
+import tdas.ArbolCitasTDA;
 import implementaciones.ArbolCitas;
 
 
 public class TestArbolCitas {
 	public static void main(String[] args) {
-		implementaciones.ArbolCitas arbol1 = new implementaciones.ArbolCitas();
+		ArbolCitasTDA arbol1 = new ArbolCitas();
 		arbol1.inicializar();
 		arbol1.agregar("1530", "Pedro");
 		arbol1.agregar("930", "Alex");
@@ -15,7 +16,7 @@ public class TestArbolCitas {
 		arbol1.eliminar("930", "Alex");
 		System.out.println(arbol1.toString());
 
-		implementaciones.ArbolCitas arbol2 = new implementaciones.ArbolCitas();
+		ArbolCitasTDA arbol2 = new ArbolCitas();
 		arbol2.inicializar();
 		arbol2.agregar("1330", "a");
 		arbol2.agregar("1000", "b");

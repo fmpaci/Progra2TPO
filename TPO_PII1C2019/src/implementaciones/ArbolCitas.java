@@ -106,18 +106,14 @@ public class ArbolCitas implements ArbolCitasTDA {
 
 	private String[] mayor(ArbolCitasTDA arbol) {
 		if(arbol.hijoDerecho().arbolVacio()) {
-			String[] datos = new String[2];
-			datos[0] = arbol.hora();
-			datos[1] = arbol.cliente();
+			String[] datos = { arbol.hora(), arbol.cliente() };
 			return datos;
 		} else 
 			return mayor(arbol.hijoDerecho());
 	}
 	private String[] menor(ArbolCitasTDA arbol) {
 		if(arbol.hijoIzquierdo().arbolVacio()) {
-			String[] datos = new String[2];
-			datos[0] = arbol.hora();
-			datos[1] = arbol.cliente();
+			String[] datos = { arbol.hora(), arbol.cliente() };
 			return datos;
 		} else 
 			return menor(arbol.hijoIzquierdo());
@@ -127,7 +123,7 @@ public class ArbolCitas implements ArbolCitasTDA {
 		if (!this.arbolVacio()) {
 			String izq = this.hijoIzquierdo().toString();
 			String der = this.hijoDerecho().toString();
-			return "(" + this.hora() + ", " + this.cliente() + ") { " + izq + ", " + der + " }"; 
+			return "(" + this.hora() + ", " + this.cliente() + ") -> { " + izq + "," + der + " } "; 
 		}else {
 			return "";
 		}
