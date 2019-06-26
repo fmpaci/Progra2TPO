@@ -3,6 +3,8 @@ package implementaciones;
 import tdas.AgendaCitasTDA;
 import tdas.ColaTDA;
 import tdas.ConjuntoTDA;
+import tdas.ArbolCitasTDA;
+
 
 public class ImpAgendaCitas implements AgendaCitasTDA {
 	
@@ -75,8 +77,7 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 	
 	@Override
 	public void agregarNuevaCita(String abogado, String fecha, String hora, String cliente) {
-		// TODO Auto-generated method stub
-
+		
 	}
 	
 	@Override
