@@ -27,23 +27,23 @@ public class TestArbolCitas {
 		arbol2.agregar("1030", "g");
 		arbol2.agregar("1430", "h");
 		arbol2.agregar("930", "i");
-		System.out.println(arbol2.toString());
+		System.out.println(arbol2);
 		arbol2.eliminar("1400", "e");
-		System.out.println(arbol2.toString());
+		System.out.println(arbol2);
 		arbol2.eliminar("1000", "b");
-		System.out.println(arbol2.toString());
+		System.out.println(arbol2);
 		arbol2.eliminar("1330", "a");
-		System.out.println(arbol2.toString());
+		System.out.println(arbol2);
 		arbol2.agregar("1500", "x");
-		System.out.println(arbol2.toString());
+		System.out.println(arbol2);
 		arbol2.agregar("1200", "y");
-		System.out.println(arbol2.toString());
+		System.out.println(arbol2);
 		arbol2.eliminar("930", "i");
-		System.out.println(arbol2.toString());
+		System.out.println(arbol2);
 		arbol2.eliminar("1100", "c");
-		System.out.println(arbol2.toString());
+		System.out.println(arbol2);
 		arbol2.eliminar("1500", "x");
-		System.out.println(arbol2.toString());
+		System.out.println(arbol2);
 	}
 
 }
