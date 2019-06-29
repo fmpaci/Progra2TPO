@@ -171,6 +171,19 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 		
 	}
 	
+	private boolean existeHora(ArbolCitasTDA nArbol, String hora) {
+		if(!nArbol.arbolVacio()) {
+			if(nArbol.hora() == hora) {
+				return true;
+			}
+			if(Integer.valueOf(nArbol.hora()) < Integer.valueOf(hora)) {
+				return existeHora(nArbol.hijoDerecho(), hora);
+			}else{
+				return existeHora(nArbol.hijoIzquierdo(), hora);
+			}
+			}
+		return false;
+	}
 }
 
 
