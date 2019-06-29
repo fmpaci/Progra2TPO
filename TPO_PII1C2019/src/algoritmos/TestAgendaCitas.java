@@ -7,7 +7,7 @@ import tdas.ColaTDA;
 public class TestAgendaCitas {
 
 	public static void main(String[] args) {
-		AgendaCitasTDA citas = new implementaciones.ImpAgendaCitas();
+		AgendaCitasTDA citas = new implementaciones.AgendaCitas();
 		ConjuntoTDA abogados = new implementaciones.Conjunto();
 		ConjuntoTDA fechas = new implementaciones.Conjunto();
 		ColaTDA cola = new implementaciones.Cola();

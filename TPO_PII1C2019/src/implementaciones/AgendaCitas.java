@@ -6,7 +6,7 @@ import tdas.ColaTDA;
 import tdas.ConjuntoTDA;
 import tdas.ArbolCitasTDA;
 
-public class ImpAgendaCitas implements AgendaCitasTDA {
+public class AgendaCitas implements AgendaCitasTDA {
 	
 	NodoAgenda primerAgenda;
 	
@@ -75,7 +75,15 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 			if(auxAgenda != null) {
 				eliminarNodoFecha(auxAgenda, fecha);
 				if(auxAgenda.primeraFecha == null) {//si el abogado ya no tiene fechas, lo elimino
-					auxAgenda.sigAbogado = auxAgenda.sigAbogado.sigAbogado;
+					if (primerAgenda.abogado.equalsIgnoreCase(abogado)) {
+						primerAgenda = primerAgenda.sigAbogado;
+					} else {
+						NodoAgenda nAgenda = primerAgenda;
+						while(!nAgenda.sigAbogado.abogado.equalsIgnoreCase(abogado)) {
+							nAgenda = nAgenda.sigAbogado;
+						}
+						nAgenda.sigAbogado = auxAgenda.sigAbogado;
+					}
 				}
 			}
 		}
@@ -179,11 +187,14 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 	private void eliminarNodoFecha(NodoAgenda abogado, String fecha) {	
 		if(abogado.primeraFecha.fecha.equalsIgnoreCase(fecha)) {
 			abogado.primeraFecha = abogado.primeraFecha.siguienteFecha;
-		}else {
+		} else {
 			NodoDia aux = abogado.primeraFecha;
 			while(aux.siguienteFecha != null && !aux.siguienteFecha.fecha.equalsIgnoreCase(fecha))
 				aux = aux.siguienteFecha;
-			aux.siguienteFecha = aux.siguienteFecha.siguienteFecha;
+			if (aux.siguienteFecha != null) {
+				// hay que considerar el caso que no exista la fecha que se quiere eliminar
+				aux.siguienteFecha = aux.siguienteFecha.siguienteFecha;
+			}
 		}	
 	}
 // 
@@ -206,7 +217,7 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 			if(nArbol.hora().equalsIgnoreCase(hora)) {
 				return true;
 			}
-			if(Integer.valueOf(nArbol.hora()) < Integer.valueOf(hora)) {
+			if(nArbol.hora().compareToIgnoreCase(hora) < 0) {
 				return existeHora(nArbol.hijoDerecho(), hora);
 			}else{
 				return existeHora(nArbol.hijoIzquierdo(), hora);
@@ -219,7 +230,7 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 		if(hora.equalsIgnoreCase(nArbol.hora())) {
 			return nArbol.cliente();
 		}
-		if(Integer.valueOf(nArbol.hora()) < Integer.valueOf(hora)) {
+		if(nArbol.hora().compareToIgnoreCase(hora) < 0) {
 			return clienteCitado(nArbol.hijoDerecho(), hora);
 		}else{
 			return clienteCitado(nArbol.hijoIzquierdo(), hora);
@@ -229,7 +240,7 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 	private void colaTurnos(ArbolCitasTDA nArbol,ColaTDA cola) {
 		if(!nArbol.arbolVacio()) {
 			colaTurnos(nArbol.hijoIzquierdo(),cola);
-			cola.acolar(nArbol.hora());
+			cola.acolar(nArbol.cliente());
 			colaTurnos(nArbol.hijoDerecho(),cola);
 		}
 	}
