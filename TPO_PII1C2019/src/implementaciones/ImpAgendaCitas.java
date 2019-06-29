@@ -4,7 +4,6 @@ package implementaciones;
 import tdas.AgendaCitasTDA;
 import tdas.ColaTDA;
 import tdas.ConjuntoTDA;
-import tdas.ArbolCitasTDA;
 
 
 public class ImpAgendaCitas implements AgendaCitasTDA {
