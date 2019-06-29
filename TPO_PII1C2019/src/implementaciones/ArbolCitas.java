@@ -18,7 +18,7 @@ public class ArbolCitas implements ArbolCitasTDA {
 
 	@Override
 	public void agregar(String hora, String cliente) {
-		
+		Integer horaCon = this.convertirHoraAnumero(hora);
 		if(this.arbolVacio()) {
 			nArbol = new NodoArbol();
 			nArbol.hora = hora;
@@ -28,44 +28,36 @@ public class ArbolCitas implements ArbolCitasTDA {
 			nArbol.hijoDer = new ArbolCitas();
 			nArbol.hijoDer.inicializar();
 		}
-		else if(Integer.valueOf(nArbol.hora) > Integer.valueOf(hora)) 
+		else if(this.horaNumero() > horaCon) 
 			nArbol.hijoIzq.agregar(hora, cliente);
-		else if(Integer.valueOf(nArbol.hora) < Integer.valueOf(hora)) 
+		else if(this.horaNumero() < horaCon) 
 			nArbol.hijoDer.agregar(hora, cliente);
 	}
 
 	@Override
 	public void eliminar(String hora, String cliente) {
+		Integer horaCon = this.convertirHoraAnumero(hora);
 		if(!this.arbolVacio()) {
-			if(this.hijoIzquierdo().arbolVacio() && this.hijoDerecho().arbolVacio()){
-				//System.out.println("5");
+			if(this.horaNumero().equals(horaCon) && this.cliente().equalsIgnoreCase(cliente) && 
+			   this.hijoIzquierdo().arbolVacio() && this.hijoDerecho().arbolVacio()){
 				nArbol = null;
 			}
-			else if(this.hora().equals(hora) && !this.hijoIzquierdo().arbolVacio()) {	
-				//System.out.println("4");
+			else if(this.horaNumero().equals(horaCon) && this.cliente().equalsIgnoreCase(cliente) && !this.hijoIzquierdo().arbolVacio()) {	
 				String[] datos = this.mayor(this.hijoIzquierdo());
-				if (this.cliente().equals(cliente)) {
-					//System.out.println(cliente + " es cliente");
-					nArbol.hora = datos[0];
-					nArbol.cliente = datos[1];
-				}
+				nArbol.hora = datos[0];
+				nArbol.cliente = datos[1];
 				this.hijoIzquierdo().eliminar(datos[0], datos[1]);
 			}
-			else if(this.hora().equals(hora) && !this.hijoDerecho().arbolVacio()) {
-				//System.out.println("3");
+			else if(this.horaNumero().equals(horaCon) && this.cliente().equalsIgnoreCase(cliente) && !this.hijoDerecho().arbolVacio()) {
 				String[] datos = this.menor(this.hijoDerecho());
-				if (this.cliente().equals(cliente)) {
-					nArbol.hora = datos[0];
-					nArbol.cliente = datos[1];
-				}
+				nArbol.hora = datos[0];
+				nArbol.cliente = datos[1];
 				this.hijoDerecho().eliminar(datos[0], datos[1]);
 			}
-			else if(Integer.valueOf(this.hora()) < Integer.valueOf(hora)) {
-				//System.out.println("2");
+			else if(this.horaNumero() < horaCon) {
 				this.hijoDerecho().eliminar(hora, cliente);
 			}
 			else {
-				//System.out.println("1");
 				this.hijoIzquierdo().eliminar(hora, cliente);
 			}
 		}
@@ -75,7 +67,7 @@ public class ArbolCitas implements ArbolCitasTDA {
 	public String hora() {
 		return nArbol.hora;
 	}
-
+	
 	@Override
 	public String cliente() {
 		return nArbol.cliente;
@@ -129,5 +121,11 @@ public class ArbolCitas implements ArbolCitasTDA {
 		}
 	}
 
+	private Integer horaNumero() {
+		return convertirHoraAnumero(nArbol.hora);
+	}
 	
+	private Integer convertirHoraAnumero(String hora) {
+		return Integer.valueOf(hora.replace(":", ""));
+	}
 }
