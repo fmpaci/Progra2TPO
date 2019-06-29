@@ -128,12 +128,6 @@ public class ArbolCitas implements ArbolCitasTDA {
 			return "";
 		}
 	}
-	public void recorrerArbol(ArbolCitasTDA nArbol) {
-		if(!nArbol.arbolVacio()) {
-			recorrerArbol(nArbol.hijoIzquierdo());
-			String valor = nArbol.hora();
-			recorrerArbol(nArbol.hijoDerecho());
-		}
-		
-	}
+
+	
 }
