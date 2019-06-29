@@ -53,7 +53,7 @@ public class ColaPrioridad implements ColaPrioridadTDA {
 	@Override
 	public String prioridad() {
 		// TODO Auto-generated method stub
-		return mayorPrioridad.valor;
+		return mayorPrioridad.prioridad;
 	}
 
 	@Override
