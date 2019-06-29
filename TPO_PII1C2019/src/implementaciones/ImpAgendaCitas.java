@@ -4,7 +4,7 @@ package implementaciones;
 import tdas.AgendaCitasTDA;
 import tdas.ColaTDA;
 import tdas.ConjuntoTDA;
-
+import tdas.ArbolCitasTDA;
 
 public class ImpAgendaCitas implements AgendaCitasTDA {
 	
@@ -45,13 +45,13 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 	
 	@Override
 	public void agregarNuevaCita(String abogado, String fecha, String hora, String cliente) {
-		//falta según implementación del arbol de citas
 		NodoAgenda auxAbogado = buscarAbogado(abogado);
 		if(auxAbogado != null) {
 			NodoDia auxDia = buscarDia(auxAbogado, fecha);
-			
+			if(auxDia != null && !existeCita(abogado, fecha, hora)) {
+				auxDia.turnos.agregar(hora, cliente);
+			}
 		}
-		
 	}
 	
 	@Override
@@ -87,7 +87,13 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 
 	@Override
 	public void eliminarCita(String abogado, String fecha, String hora, String cliente) {
-		//implementar según eliminarValorEnNodo
+		NodoAgenda auxAbogado = buscarAbogado(abogado);
+		if(auxAbogado != null) {
+			NodoDia auxDia = buscarDia(auxAbogado, fecha);
+			if(auxDia != null && !existeCita(abogado, fecha, hora)) {
+				auxDia.turnos.eliminar(hora, cliente);
+			}
+		}
 
 	}
 
@@ -96,19 +102,18 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 		NodoAgenda auxAbogado = buscarAbogado(abogado);
 		if(auxAbogado != null) {
 			NodoDia auxDia = buscarDia(auxAbogado, fecha);
-			if(auxDia != null) {
-				
-						auxDia.turnos.hora().equalsIgnoreCase(hora);
+			if(auxDia != null && !existeHora(auxDia.turnos, hora)) {
+				return true;
 			}
-			
 		}
 		return false;
 	}
 
 	@Override
 	public String clienteEnCita(String abogado, String fecha, String hora) {
-		// TODO Auto-generated method stub
-		return null;
+		NodoAgenda auxAbogado = buscarAbogado(abogado);
+		NodoDia auxDia = buscarDia(auxAbogado, fecha);
+		return clienteCitado(auxDia.turnos, hora);
 	}
 
 	@Override
@@ -125,14 +130,31 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 
 	@Override
 	public ColaTDA turnos(String abogado, String fecha) {
-		// TODO Auto-generated method stub
-		return null;
+		NodoAgenda auxAbogado = buscarAbogado(abogado);
+		ImpCola auxCola = new ImpCola();
+		auxCola.inicilizar();
+		if(auxAbogado != null) {
+			NodoDia auxDia = buscarDia(auxAbogado, fecha);
+			if(auxDia != null) {
+				colaTurnos(auxDia.turnos,auxCola);
+			}
+		}
+		return auxCola;
 	}
 
 	@Override
 	public ConjuntoTDA fechas(String abogado) {
-		// TODO Auto-generated method stub
-		return null;
+		ConjuntoTDA auxConjunto = new ImpConjunto();
+		NodoAgenda auxAbogado = buscarAbogado(abogado);
+		auxConjunto.inicializar();
+		if(auxAbogado != null) {
+			NodoDia auxDia = auxAbogado.primeraFecha;
+			while(auxDia != null) {
+				auxConjunto.agregar(auxDia.fecha);
+				auxDia = auxDia.siguienteFecha;
+			}
+		}
+		return auxConjunto;
 	}
 //funciones auxiliares para agregar nuevo día
 	private NodoAgenda crearAbogado(String abogado, String dia, String fecha) {
@@ -149,8 +171,8 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 		NodoDia auxDia = new NodoDia();
 		auxDia.dia = dia;
 		auxDia.fecha = fecha;
-		//auxDia.turnos = new ArbolCitas();
-		//auxDia.turnos.inicializar();
+		auxDia.turnos = new ArbolCitas();
+		auxDia.turnos.inicializar();
 		auxDia.siguienteFecha = null;
 		return auxDia;
 	}
@@ -165,8 +187,7 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 			while(aux.siguienteFecha != null && !aux.siguienteFecha.fecha.equalsIgnoreCase(fecha))
 				aux = aux.siguienteFecha;
 			aux.siguienteFecha = aux.siguienteFecha.siguienteFecha;
-		}
-		
+		}	
 	}
 // 
 	private NodoAgenda buscarAbogado(String abogado) {
@@ -174,7 +195,6 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 		while(aux != null && !aux.abogado.equalsIgnoreCase(abogado) )
 			aux = aux.sigAbogado;
 		return aux;
-		
 	} 
 	
 	private NodoDia buscarDia(NodoAgenda abogado, String fecha) {
@@ -182,7 +202,6 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 		while(aux != null && !aux.fecha.equalsIgnoreCase(fecha) )
 			aux = aux.siguienteFecha;
 		return aux;
-		
 	}
 	
 	private boolean existeHora(ArbolCitasTDA nArbol, String hora) {
@@ -195,9 +214,29 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 			}else{
 				return existeHora(nArbol.hijoIzquierdo(), hora);
 			}
-			}
+		}
 		return false;
 	}
+	
+	private String clienteCitado(ArbolCitasTDA nArbol, String hora) {
+		if(nArbol.hora() == hora) {
+			return nArbol.cliente();
+		}
+		if(Integer.valueOf(nArbol.hora()) < Integer.valueOf(hora)) {
+			return clienteCitado(nArbol.hijoDerecho(), hora);
+		}else{
+			return clienteCitado(nArbol.hijoIzquierdo(), hora);
+		}
+	}
+	
+	private void colaTurnos(ArbolCitasTDA nArbol,ColaTDA cola) {
+		if(!nArbol.arbolVacio()) {
+			colaTurnos(nArbol.hijoIzquierdo(),cola);
+			cola.acolar(nArbol.hora());
+			colaTurnos(nArbol.hijoDerecho(),cola);
+		}
+	}
+	
 }
 
 
