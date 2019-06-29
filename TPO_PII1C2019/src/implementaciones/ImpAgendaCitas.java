@@ -16,6 +16,7 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 	public void inicializar() {
 		primerAgenda = null;
 
+
 	}
 	
 	
@@ -46,6 +47,12 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 	@Override
 	public void agregarNuevaCita(String abogado, String fecha, String hora, String cliente) {
 		//falta según implementación del arbol de citas
+		NodoAgenda auxAbogado = buscarAbogado(abogado);
+		if(auxAbogado != null) {
+			NodoDia auxDia = buscarDia(auxAbogado, fecha);
+			
+		}
+		
 	}
 	
 	@Override
@@ -87,7 +94,15 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 
 	@Override
 	public boolean existeCita(String abogado, String fecha, String hora) {
-		// TODO Auto-generated method stub
+		NodoAgenda auxAbogado = buscarAbogado(abogado);
+		if(auxAbogado != null) {
+			NodoDia auxDia = buscarDia(auxAbogado, fecha);
+			if(auxDia != null) {
+				
+						auxDia.turnos.hora().equalsIgnoreCase(hora);
+			}
+			
+		}
 		return false;
 	}
 
