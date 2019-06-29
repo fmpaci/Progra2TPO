@@ -44,7 +44,7 @@ public class ArbolCitas implements ArbolCitasTDA {
 			else if(this.hora().equals(hora) && !this.hijoIzquierdo().arbolVacio()) {	
 				//System.out.println("4");
 				String[] datos = this.mayor(this.hijoIzquierdo());
-				if (this.cliente().equals(cliente)) {
+				if (this.cliente().equalsIgnoreCase(cliente)) {
 					//System.out.println(cliente + " es cliente");
 					nArbol.hora = datos[0];
 					nArbol.cliente = datos[1];
@@ -54,7 +54,7 @@ public class ArbolCitas implements ArbolCitasTDA {
 			else if(this.hora().equals(hora) && !this.hijoDerecho().arbolVacio()) {
 				//System.out.println("3");
 				String[] datos = this.menor(this.hijoDerecho());
-				if (this.cliente().equals(cliente)) {
+				if (this.cliente().equalsIgnoreCase(cliente)) {
 					nArbol.hora = datos[0];
 					nArbol.cliente = datos[1];
 				}

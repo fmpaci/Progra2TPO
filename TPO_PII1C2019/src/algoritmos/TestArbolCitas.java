@@ -44,6 +44,7 @@ public class TestArbolCitas {
 		System.out.println(arbol2);
 		arbol2.eliminar("1500", "x");
 		System.out.println(arbol2);
+		
 	}
 
 }
