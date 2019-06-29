@@ -30,6 +30,8 @@ public class TestVariosFPA {
 			abogados.sacar(aux);
 		}
 		System.out.println("Terminado");
+		
+
 	}
 	
 
