@@ -12,15 +12,13 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 	
 	
 	@Override
-	public void inicializar() {
+	public void inicializar() {//funciona
 		primerAgenda = null;
-
-
 	}
 	
 	
 	@Override
-	public void agregarNuevoDia(String abogado, String dia, String fecha) {
+	public void agregarNuevoDia(String abogado, String dia, String fecha) {//funciona
 		if(primerAgenda == null) {
 			primerAgenda = crearAbogado(abogado, dia, fecha);
 		}else {
@@ -41,21 +39,20 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 			}
 		}
 	}
-
 	
 	@Override
-	public void agregarNuevaCita(String abogado, String fecha, String hora, String cliente) {
+	public void agregarNuevaCita(String abogado, String fecha, String hora, String cliente) {//funciona
 		NodoAgenda auxAbogado = buscarAbogado(abogado);
 		if(auxAbogado != null) {
 			NodoDia auxDia = buscarDia(auxAbogado, fecha);
-			if(auxDia != null && !existeCita(abogado, fecha, hora)) {
+			if(auxDia != null && existeCita(abogado, fecha, hora) == false) {
 				auxDia.turnos.agregar(hora, cliente);
 			}
 		}
 	}
 	
 	@Override
-	public void eliminarAbogado(String abogado) {
+	public void eliminarAbogado(String abogado) {//funciona
 		if(primerAgenda != null) {
 			if(primerAgenda.abogado.equalsIgnoreCase(abogado)) {
 				primerAgenda = primerAgenda.sigAbogado;
@@ -72,7 +69,7 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 	}
 
 	@Override
-	public void eliminarFecha(String abogado, String fecha) {
+	public void eliminarFecha(String abogado, String fecha) {//testeada y funcionando
 		if(primerAgenda != null) {
 			NodoAgenda auxAgenda = buscarAbogado(abogado);
 			if(auxAgenda != null) {
@@ -86,11 +83,11 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 	
 
 	@Override
-	public void eliminarCita(String abogado, String fecha, String hora, String cliente) {
+	public void eliminarCita(String abogado, String fecha, String hora, String cliente) {//funciona legal, pero.. bonito???
 		NodoAgenda auxAbogado = buscarAbogado(abogado);
 		if(auxAbogado != null) {
 			NodoDia auxDia = buscarDia(auxAbogado, fecha);
-			if(auxDia != null && !existeCita(abogado, fecha, hora)) {
+			if(auxDia != null && existeCita(abogado, fecha, hora) ) {
 				auxDia.turnos.eliminar(hora, cliente);
 			}
 		}
@@ -98,11 +95,11 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 	}
 
 	@Override
-	public boolean existeCita(String abogado, String fecha, String hora) {
+	public boolean existeCita(String abogado, String fecha, String hora) {//funciona legal y bonito
 		NodoAgenda auxAbogado = buscarAbogado(abogado);
 		if(auxAbogado != null) {
 			NodoDia auxDia = buscarDia(auxAbogado, fecha);
-			if(auxDia != null && !existeHora(auxDia.turnos, hora)) {
+			if(auxDia != null && existeHora(auxDia.turnos, hora) ) {
 				return true;
 			}
 		}
@@ -110,14 +107,14 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 	}
 
 	@Override
-	public String clienteEnCita(String abogado, String fecha, String hora) {
+	public String clienteEnCita(String abogado, String fecha, String hora) {//funciona
 		NodoAgenda auxAbogado = buscarAbogado(abogado);
 		NodoDia auxDia = buscarDia(auxAbogado, fecha);
 		return clienteCitado(auxDia.turnos, hora);
 	}
 
 	@Override
-	public ConjuntoTDA abogados() {
+	public ConjuntoTDA abogados() {//funciona
 		NodoAgenda aux = primerAgenda;
 		ConjuntoTDA conjAbogados = new ImpConjunto();
 		conjAbogados.inicializar();
@@ -129,7 +126,7 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 	}
 
 	@Override
-	public ColaTDA turnos(String abogado, String fecha) {
+	public ColaTDA turnos(String abogado, String fecha) {//funciona
 		NodoAgenda auxAbogado = buscarAbogado(abogado);
 		ImpCola auxCola = new ImpCola();
 		auxCola.inicilizar();
@@ -143,7 +140,7 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 	}
 
 	@Override
-	public ConjuntoTDA fechas(String abogado) {
+	public ConjuntoTDA fechas(String abogado) {//funciona
 		ConjuntoTDA auxConjunto = new ImpConjunto();
 		NodoAgenda auxAbogado = buscarAbogado(abogado);
 		auxConjunto.inicializar();
@@ -204,9 +201,9 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 		return aux;
 	}
 	
-	private boolean existeHora(ArbolCitasTDA nArbol, String hora) {
+	public boolean existeHora(ArbolCitasTDA nArbol, String hora) {
 		if(!nArbol.arbolVacio()) {
-			if(nArbol.hora() == hora) {
+			if(nArbol.hora().equalsIgnoreCase(hora)) {
 				return true;
 			}
 			if(Integer.valueOf(nArbol.hora()) < Integer.valueOf(hora)) {
@@ -218,7 +215,7 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 		return false;
 	}
 	
-	private String clienteCitado(ArbolCitasTDA nArbol, String hora) {
+	private String clienteCitado(ArbolCitasTDA nArbol, String hora) {//recorrer arbol en orden
 		if(hora.equalsIgnoreCase(nArbol.hora())) {
 			return nArbol.cliente();
 		}
