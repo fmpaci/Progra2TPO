@@ -8,9 +8,9 @@ public class TestAgendaCitas {
 
 	public static void main(String[] args) {
 		AgendaCitasTDA citas = new implementaciones.ImpAgendaCitas();
-		ConjuntoTDA abogados = new implementaciones.ImpConjunto();
-		ConjuntoTDA fechas = new implementaciones.ImpConjunto();
-		ColaTDA cola = new implementaciones.ImpCola();
+		ConjuntoTDA abogados = new implementaciones.Conjunto();
+		ConjuntoTDA fechas = new implementaciones.Conjunto();
+		ColaTDA cola = new implementaciones.Cola();
 		String aux = "lol";
 		//aux = null;
 		abogados.inicializar();

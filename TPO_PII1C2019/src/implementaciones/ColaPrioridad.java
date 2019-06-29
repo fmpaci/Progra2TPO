@@ -2,7 +2,7 @@ package implementaciones;
 
 import tdas.ColaPrioridadTDA;
 
-public class ImpColaPrioridad implements ColaPrioridadTDA {
+public class ColaPrioridad implements ColaPrioridadTDA {
 	
 	public class NodoPrioridad {
 		String valor;

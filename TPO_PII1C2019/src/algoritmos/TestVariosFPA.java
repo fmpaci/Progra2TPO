@@ -6,7 +6,7 @@ public class TestVariosFPA {
 
 	public static void main(String[] args) {
 		implementaciones.ImpAgendaCitas citas = new implementaciones.ImpAgendaCitas();
-		ConjuntoTDA abogados = new implementaciones.ImpConjunto();
+		ConjuntoTDA abogados = new implementaciones.Conjunto();
 		String aux = "lol";
 		//aux = null;
 		abogados.inicializar();

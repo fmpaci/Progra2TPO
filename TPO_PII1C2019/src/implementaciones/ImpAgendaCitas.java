@@ -116,7 +116,7 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 	@Override
 	public ConjuntoTDA abogados() {//funciona
 		NodoAgenda aux = primerAgenda;
-		ConjuntoTDA conjAbogados = new ImpConjunto();
+		ConjuntoTDA conjAbogados = new Conjunto();
 		conjAbogados.inicializar();
 		while(aux != null) {
 			conjAbogados.agregar(aux.abogado);
@@ -128,7 +128,7 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 	@Override
 	public ColaTDA turnos(String abogado, String fecha) {//funciona
 		NodoAgenda auxAbogado = buscarAbogado(abogado);
-		ImpCola auxCola = new ImpCola();
+		Cola auxCola = new Cola();
 		auxCola.inicilizar();
 		if(auxAbogado != null) {
 			NodoDia auxDia = buscarDia(auxAbogado, fecha);
@@ -141,7 +141,7 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 
 	@Override
 	public ConjuntoTDA fechas(String abogado) {//funciona
-		ConjuntoTDA auxConjunto = new ImpConjunto();
+		ConjuntoTDA auxConjunto = new Conjunto();
 		NodoAgenda auxAbogado = buscarAbogado(abogado);
 		auxConjunto.inicializar();
 		if(auxAbogado != null) {

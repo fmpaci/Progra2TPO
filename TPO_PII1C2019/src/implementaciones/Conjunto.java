@@ -3,7 +3,7 @@ package implementaciones;
 import tdas.ConjuntoTDA;
 
 
-public class ImpConjunto implements ConjuntoTDA {
+public class Conjunto implements ConjuntoTDA {
 	
 	public class NodoConjunto {
 		String valor;
