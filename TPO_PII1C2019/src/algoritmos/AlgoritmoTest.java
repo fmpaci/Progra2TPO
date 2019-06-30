@@ -128,7 +128,8 @@ public class AlgoritmoTest {
 		abogadosConMasCitas.sacar(abogado);
 
 		// Validación
-		Assert.assertEquals("un abogado", abogado);
+		//Assert.assertEquals("un abogado", abogado); // ESTO NO ESTABA BIEN
+		Assert.assertEquals("otro abogado", abogado);
 		Assert.assertTrue(abogadosConMasCitas.conjuntoVacio());
 	}
 
