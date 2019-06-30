@@ -8,8 +8,9 @@ public class Algoritmo implements IAlgoritmo {
 
 	@Override
 	public boolean disponible(AgendaCitasTDA agenda, String abogado, String fecha, String hora) {
-		// TODO Auto-generated method stub
-		return false;
+		if (!agenda.abogados().pertenece(abogado)) return false;
+		if (!agenda.fechas(abogado).pertenece(fecha)) return false;
+		return !agenda.existeCita(abogado, fecha, hora);
 	}
 
 	@Override
