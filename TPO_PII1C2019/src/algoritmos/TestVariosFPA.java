@@ -5,7 +5,7 @@ import tdas.ConjuntoTDA;
 public class TestVariosFPA {
 
 	public static void main(String[] args) {
-		implementaciones.ImpAgendaCitas citas = new implementaciones.ImpAgendaCitas();
+		implementaciones.AgendaCitas citas = new implementaciones.AgendaCitas();
 		ConjuntoTDA abogados = new implementaciones.Conjunto();
 		String aux = "lol";
 		//aux = null;

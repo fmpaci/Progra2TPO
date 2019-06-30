@@ -6,7 +6,7 @@ import tdas.ColaTDA;
 import tdas.ConjuntoTDA;
 import tdas.ArbolCitasTDA;
 
-public class ImpAgendaCitas implements AgendaCitasTDA {
+public class AgendaCitas implements AgendaCitasTDA {
 	
 	NodoAgenda primerAgenda;
 	

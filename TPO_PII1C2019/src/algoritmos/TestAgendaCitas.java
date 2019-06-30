@@ -7,7 +7,7 @@ import tdas.ColaTDA;
 public class TestAgendaCitas {
 
 	public static void main(String[] args) {
-		AgendaCitasTDA citas = new implementaciones.ImpAgendaCitas();
+		AgendaCitasTDA citas = new implementaciones.AgendaCitas();
 		ConjuntoTDA abogados = new implementaciones.Conjunto();
 		ConjuntoTDA fechas = new implementaciones.Conjunto();
 		ColaTDA cola = new implementaciones.Cola();
@@ -47,24 +47,24 @@ public class TestAgendaCitas {
 		citas.agregarNuevaCita("Pedro", "23/06/2019", "1000", "Cliente5");
 		citas.agregarNuevaCita("Ramon", "24/06/2019", "1030", "Cliente6");
 		
-		/*Prueba de conjunto Fechas
+		/*Prueba de conjunto Fechas*/
 		fechas = citas.fechas("Alberto");
 		while(!fechas.conjuntoVacio()) {
 			aux = fechas.elegir();
 			System.out.println(aux);
 			fechas.sacar(aux);
 		}
-		*/
 		
 		
-		/*Prueba de Cola de turnos
+		
+		/*Prueba de Cola de turnos*/
 		cola = citas.turnos("Alberto", "24/06/2019");
 		
 		while(!cola.colaVacia()) {
 			System.out.println(cola.primero());
 			cola.desacolar();
 		}
-		*/
+		
 		
 		
 		/*
