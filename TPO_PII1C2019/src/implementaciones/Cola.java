@@ -45,7 +45,8 @@ public class Cola implements ColaTDA {
 
 	@Override
 	public String primero() {
-		return primero.valor;
+		if (primero == null) return null;
+		else return primero.valor;
 	}
 
 	@Override

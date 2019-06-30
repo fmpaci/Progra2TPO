@@ -48,8 +48,36 @@ public class Algoritmo implements IAlgoritmo {
 
 	@Override
 	public String abogadoUltimaVez(AgendaCitasTDA agenda, String cliente) {
-		// TODO Auto-generated method stub
-		return null;
+		String ultimaFecha = "";
+		Integer ultimoTurnoPosicion = -1;
+		String abogadoSeleccionado = "";
+		ConjuntoTDA abogados = agenda.abogados();
+		while (!abogados.conjuntoVacio()) {
+			String abogado = abogados.elegir();
+			abogados.sacar(abogado);
+			
+			ConjuntoTDA fechas = agenda.fechas(abogado);
+			while (!fechas.conjuntoVacio()) {
+				String fecha = fechas.elegir();
+				fechas.sacar(fecha);
+				
+				if (fecha.compareTo(ultimaFecha) >= 0) {
+					Integer turnoPosicion = 0;
+					ColaTDA turnos = agenda.turnos(abogado, fecha);
+					while (!turnos.colaVacia() && !turnos.primero().equalsIgnoreCase(cliente)) {
+						turnoPosicion += 1;
+						turnos.desacolar();
+					}
+					if (!turnos.colaVacia() && turnos.primero().equalsIgnoreCase(cliente) && turnoPosicion > ultimoTurnoPosicion) {
+						ultimaFecha = fecha;
+						ultimoTurnoPosicion = turnoPosicion;
+						abogadoSeleccionado = abogado;
+					}
+				}
+			}
+		}
+		
+		return abogadoSeleccionado;
 	}
 
 	@Override
