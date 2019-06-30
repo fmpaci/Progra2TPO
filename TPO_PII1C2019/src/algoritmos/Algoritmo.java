@@ -2,7 +2,9 @@ package algoritmos;
 
 import tdas.AgendaCitasTDA;
 import tdas.ColaPrioridadTDA;
+import tdas.ColaTDA;
 import tdas.ConjuntoTDA;
+import implementaciones.Conjunto;
 
 public class Algoritmo implements IAlgoritmo {
 
@@ -15,8 +17,33 @@ public class Algoritmo implements IAlgoritmo {
 
 	@Override
 	public ConjuntoTDA masCitas(AgendaCitasTDA agenda, String fechaDesde, String fechaHasta) {
-		// TODO Auto-generated method stub
-		return null;
+		ConjuntoTDA abogadosResultantes = new Conjunto();
+		abogadosResultantes.inicializar();
+		
+		ConjuntoTDA abogados = agenda.abogados();
+		while(!abogados.conjuntoVacio()) {
+			String abogado = abogados.elegir();
+			abogados.sacar(abogado);
+			
+			Integer cantidadCitas = 0;
+			ConjuntoTDA fechas = agenda.fechas(abogado);
+			while(!fechas.conjuntoVacio()) {
+				String fecha = fechas.elegir();
+				fechas.sacar(fecha);
+			
+				if (fecha.compareTo(fechaDesde) >= 0 && fecha.compareTo(fechaHasta) < 0) {
+					ColaTDA turnos = agenda.turnos(abogado, fecha);
+					while (!turnos.colaVacia()) {
+						cantidadCitas += 1;
+						turnos.desacolar();
+					}
+				}
+			}
+			
+			if (cantidadCitas > 0) abogadosResultantes.agregar(abogado);
+		}
+		
+		return abogadosResultantes;
 	}
 
 	@Override
