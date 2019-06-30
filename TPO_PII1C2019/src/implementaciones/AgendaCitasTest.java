@@ -98,8 +98,8 @@ public class AgendaCitasTest {
 
 		// Validación
 		Assert.assertTrue(turnos.colaVacia());
-		Assert.assertEquals("otro cliente", primerCliente);
-		Assert.assertEquals("un cliente", segundoCliente);
+		Assert.assertEquals("09:00", primerCliente);
+		Assert.assertEquals("10:00", segundoCliente);
 	}
 
 	@Test
@@ -347,6 +347,8 @@ public class AgendaCitasTest {
 		String cuartoCliente = agendaCitas.clienteEnCita("un abogado", "2019/01/02", "09:00");
 		String quintoCliente = agendaCitas.clienteEnCita("otro abogado", "2019/01/01", "10:00");
 		String sextoCliente = agendaCitas.clienteEnCita("otro abogado", "2019/01/01", "09:00");
+		//  Caso adicional: en caso de que no exista una cita para una hora determinada
+		String septimoCliente = agendaCitas.clienteEnCita("otro abogado", "2019/01/01", "17:00");
 
 		// Validación
 		Assert.assertEquals("primer cliente", primerCliente);
@@ -355,6 +357,7 @@ public class AgendaCitasTest {
 		Assert.assertEquals("cuarto cliente", cuartoCliente);
 		Assert.assertEquals("quinto cliente", quintoCliente);
 		Assert.assertEquals("sexto cliente", sextoCliente);
+		Assert.assertEquals("", septimoCliente); // adicional
 	}
 
 }

@@ -214,10 +214,10 @@ public class AgendaCitas implements AgendaCitasTDA {
 	
 	public boolean existeHora(ArbolCitasTDA nArbol, String hora) {
 		if(!nArbol.arbolVacio()) {
-			if(nArbol.hora().equalsIgnoreCase(hora)) {
+			if(nArbol.hora().equals(hora)) {
 				return true;
 			}
-			if(nArbol.hora().compareToIgnoreCase(hora) < 0) {
+			if(nArbol.hora().compareTo(hora) < 0) {
 				return existeHora(nArbol.hijoDerecho(), hora);
 			}else{
 				return existeHora(nArbol.hijoIzquierdo(), hora);
@@ -227,20 +227,23 @@ public class AgendaCitas implements AgendaCitasTDA {
 	}
 	
 	private String clienteCitado(ArbolCitasTDA nArbol, String hora) {//recorrer arbol en orden
-		if(hora.equalsIgnoreCase(nArbol.hora())) {
-			return nArbol.cliente();
-		}
-		if(nArbol.hora().compareToIgnoreCase(hora) < 0) {
-			return clienteCitado(nArbol.hijoDerecho(), hora);
+		if (!nArbol.arbolVacio()) {
+			if(hora.equals(nArbol.hora())) {
+				return nArbol.cliente();
+			}else if(nArbol.hora().compareTo(hora) < 0) {
+				return clienteCitado(nArbol.hijoDerecho(), hora);
+			}else{
+				return clienteCitado(nArbol.hijoIzquierdo(), hora);
+			}
 		}else{
-			return clienteCitado(nArbol.hijoIzquierdo(), hora);
+			return "";
 		}
 	}
 	
 	private void colaTurnos(ArbolCitasTDA nArbol,ColaTDA cola) {
 		if(!nArbol.arbolVacio()) {
 			colaTurnos(nArbol.hijoIzquierdo(),cola);
-			cola.acolar(nArbol.cliente());
+			cola.acolar(nArbol.hora());
 			colaTurnos(nArbol.hijoDerecho(),cola);
 		}
 	}
