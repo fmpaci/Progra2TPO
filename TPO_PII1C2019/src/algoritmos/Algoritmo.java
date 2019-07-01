@@ -48,8 +48,8 @@ public class Algoritmo implements IAlgoritmo {
 
 	@Override
 	public String abogadoUltimaVez(AgendaCitasTDA agenda, String cliente) {
-		String ultimaFecha = "";
-		Integer ultimoTurnoPosicion = -1;
+		String ultimaFechaAtencion = "";
+		String ultimaHoraAtencion = "";
 		String abogadoSeleccionado = "";
 		ConjuntoTDA abogados = agenda.abogados();
 		while (!abogados.conjuntoVacio()) {
@@ -61,17 +61,18 @@ public class Algoritmo implements IAlgoritmo {
 				String fecha = fechas.elegir();
 				fechas.sacar(fecha);
 				
-				if (fecha.compareTo(ultimaFecha) >= 0) {
-					Integer turnoPosicion = 0;
+				if (fecha.compareTo(ultimaFechaAtencion) >= 0) {
 					ColaTDA turnos = agenda.turnos(abogado, fecha);
-					while (!turnos.colaVacia() && !turnos.primero().equalsIgnoreCase(cliente)) {
-						turnoPosicion += 1;
+					while (!turnos.colaVacia()) {
+						String hora = turnos.primero();
 						turnos.desacolar();
-					}
-					if (!turnos.colaVacia() && turnos.primero().equalsIgnoreCase(cliente) && turnoPosicion > ultimoTurnoPosicion) {
-						ultimaFecha = fecha;
-						ultimoTurnoPosicion = turnoPosicion;
-						abogadoSeleccionado = abogado;
+						
+						String clienteEnCita = agenda.clienteEnCita(abogado, fecha, hora);
+						if (clienteEnCita.equalsIgnoreCase(cliente) && hora.compareTo(ultimaHoraAtencion) > 0) {
+							abogadoSeleccionado = abogado;
+							ultimaFechaAtencion = fecha;
+							ultimaHoraAtencion = hora;
+						}
 					}
 				}
 			}

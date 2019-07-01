@@ -195,7 +195,7 @@ public class AlgoritmoTest {
 		agenda.agregarNuevaCita("un abogado", "2019/01/01", "13:00", "un cliente");
 		agenda.agregarNuevoDia("otro abogado", "miercoles", "2019/01/02");
 		agenda.agregarNuevaCita("otro abogado", "2019/01/02", "14:00", "otro cliente");
-
+		
 		// Operación
 		String abogado = algoritmo.abogadoUltimaVez(agenda, "un cliente");
 
@@ -212,7 +212,7 @@ public class AlgoritmoTest {
 		agenda.agregarNuevaCita("un abogado", "2019/01/02", "13:00", "otro cliente");
 		agenda.agregarNuevoDia("otro abogado", "miercoles", "2019/01/02");
 		agenda.agregarNuevaCita("otro abogado", "2019/01/02", "12:00", "un cliente");
-
+		
 		// Operación
 		String abogado = algoritmo.abogadoUltimaVez(agenda, "un cliente");
 
