@@ -263,7 +263,8 @@ public class AlgoritmoTest {
 		String[] terceraCitaEsperada = new String[] { "miercoles", "10:30", "un cliente" };
 
 		// Operación
-		String[][] citas = algoritmo.obtenerCitas(agenda, "un abogado", "2019/12/31");
+		//String[][] citas = algoritmo.obtenerCitas(agenda, "un abogado", "2019/12/31"); //ESTO NO ESTABA BIEN
+		String[][] citas = algoritmo.obtenerCitas(agenda, "un abogado", "2018/12/31"); //DEBERIA SER UNA FECHA DEL 2018
 
 		// Validación
 		Assert.assertEquals(3, citas.length);

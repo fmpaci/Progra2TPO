@@ -4,8 +4,9 @@ import tdas.AgendaCitasTDA;
 import tdas.ColaPrioridadTDA;
 import tdas.ColaTDA;
 import tdas.ConjuntoTDA;
-import implementaciones.Cola;
-import implementaciones.ColaPrioridad;
+
+import java.util.Arrays;
+
 import implementaciones.Conjunto;
 
 public class Algoritmo implements IAlgoritmo {
@@ -85,59 +86,90 @@ public class Algoritmo implements IAlgoritmo {
 
 	@Override
 	public String[][] obtenerCitas(AgendaCitasTDA agenda, String abogado, String fecha) {
+		String[][] citas = new String[30][3];
+		String[][] rangoDias = diasSemana(fecha);
+		ConjuntoTDA fechas = agenda.fechas(abogado);
+		Integer i = 0;
+		while (!fechas.conjuntoVacio()) {
+			String auxFecha = fechas.elegir();
+			fechas.sacar(auxFecha);
+			if (Arrays.asList(rangoDias[0]).contains(auxFecha)) {
+				Integer idxRangoDia = Arrays.asList(rangoDias[0]).indexOf(auxFecha);
+				ColaTDA turnos = agenda.turnos(abogado, auxFecha);
+				while (!turnos.colaVacia()) {
+					String hora = turnos.primero();
+					turnos.desacolar();
+					String cliente = agenda.clienteEnCita(abogado, auxFecha, hora);
+					String nombreDia = rangoDias[1][idxRangoDia];
+					citas[i] = new String[]{ nombreDia, hora, cliente };
+					i++;
+				}
+			}
+		}
+		
+		String[][] compacto = compactarArreglo(citas);
+		ordenarArreglo(compacto, 0, 1);
+		return compacto;
+	}
+
+	@Override
+	public String[][] conQuienSeReunio(AgendaCitasTDA agenda, String cliente) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String[][] conQuienSeReunio(AgendaCitasTDA agenda, String cliente) {
-		ConjuntoTDA abogados = new Conjunto();
-		ConjuntoTDA fechas = new Conjunto();
-		ColaTDA turnos = new Cola();
-		String nombreAbogado;
-		String fechaTurno;
-		String horaTurno;
-		String auxCliente;
-		String[][] reunido = new String[1000][3];
-		int i = 0;
-				
-		abogados = agenda.abogados();
-
-		
-		if (abogados.conjuntoVacio())
-			return new String[][] { {} };
-
-		
-		while(!abogados.conjuntoVacio()) {
-			nombreAbogado = abogados.elegir();
-			fechas = agenda.fechas(nombreAbogado);
-			while(!fechas.conjuntoVacio()) {
-				fechaTurno = fechas.elegir();
-				fechas.sacar(fechaTurno);
-				turnos = agenda.turnos(nombreAbogado, fechaTurno);
-				while(!turnos.colaVacia()) {
-					horaTurno = turnos.primero();
-					auxCliente = agenda.clienteEnCita(nombreAbogado, fechaTurno, horaTurno);
-					if(auxCliente.equalsIgnoreCase(cliente)) {
-						reunido[i][0] = nombreAbogado;
-						reunido[i][1] = horaTurno;
-						reunido[i][2] = fechaTurno;
-						i += 1;
-					}
-					turnos.desacolar();
-				}
-				fechas.sacar(fechaTurno);
+	public ColaPrioridadTDA libresTotal(AgendaCitasTDA agenda, String fecha) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	protected void ordenarArreglo(String[][] arreglo, Integer ordenarPor1, Integer ordenarPor2) {  
+	    for (int i = 1; i < arreglo.length; i++) {
+	        String[] current = arreglo[i];
+	        String clave = current[ordenarPor1] + current[ordenarPor2];
+	        int j = i - 1;
+	        while(j >= 0 && clave.compareToIgnoreCase(arreglo[j][ordenarPor1] + arreglo[j][ordenarPor2]) < 0) {
+	            arreglo[j+1] = arreglo[j];
+	            j--;
+	        }
+	        arreglo[j+1] = current;
+	    }
+	}
+	
+	protected String[][] compactarArreglo(String[][] arreglo) {
+		Integer conteo = 0;
+		Integer ancho = arreglo[0].length;
+		for (String[] fila : arreglo) {
+			if (fila[0] != null) {
+				conteo += 1;
 			}
-			abogados.sacar(nombreAbogado);
 		}
 		
-		return reunido;
-	}
-
-	@Override
-	public ColaPrioridadTDA libresTotal(AgendaCitasTDA agenda, String fecha) {
+		if (conteo == 0) return new String[0][0];
 		
-		return null;
+		String[][] compacto = new String[conteo][ancho];
+		Integer i = 0;
+		for (String[] fila : arreglo) {
+			if (fila[0] != null) {
+				compacto[i] = fila;
+				i++;
+			}
+		}
+		return compacto;
+	}
+	
+	protected String[][] diasSemana(String fechaDesde) {
+		String[][] fechas = new String[2][7];
+		String nuevaFecha = fechaDesde;
+		String nuevoDia = "lunes";
+		for (int i = 0; i < 7; i++) {
+			fechas[0][i] = nuevaFecha;
+			fechas[1][i] = nuevoDia;
+			nuevoDia = siguienteDiaSemana(nuevoDia);
+			nuevaFecha = sumarDia(nuevaFecha);
+		}
+		return fechas;
 	}
 	
 	protected String sumarDia(String fecha) {
@@ -194,8 +226,8 @@ public class Algoritmo implements IAlgoritmo {
 		if (diaSemana == "martes") return "miercoles";
 		if (diaSemana == "miercoles") return "jueves";
 		if (diaSemana == "jueves") return "viernes";
-		if (diaSemana == "viernes") return "sábado";
-		if (diaSemana == "sábado") return "domingo";
+		if (diaSemana == "viernes") return "sï¿½bado";
+		if (diaSemana == "sï¿½bado") return "domingo";
 		if (diaSemana == "domingo") return "lunes";
 		return null;
 	}
