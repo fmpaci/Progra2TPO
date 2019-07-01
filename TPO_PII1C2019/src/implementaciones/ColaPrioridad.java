@@ -2,7 +2,7 @@ package implementaciones;
 
 import tdas.ColaPrioridadTDA;
 
-public class ImpColaPrioridad implements ColaPrioridadTDA {
+public class ColaPrioridad implements ColaPrioridadTDA {
 	
 	public class NodoPrioridad {
 		String valor;
@@ -53,7 +53,7 @@ public class ImpColaPrioridad implements ColaPrioridadTDA {
 	@Override
 	public String prioridad() {
 		// TODO Auto-generated method stub
-		return mayorPrioridad.valor;
+		return mayorPrioridad.prioridad;
 	}
 
 	@Override

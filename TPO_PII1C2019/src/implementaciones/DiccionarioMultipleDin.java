@@ -114,7 +114,7 @@ public class DiccionarioMultipleDin implements DiccionarioMultipleTDA {
 	@Override
 	public ConjuntoTDA recuperar(String clave) {
 		NodoClave n = Clave2NodoClave(clave);
-		ConjuntoTDA c = new ImpConjunto();
+		ConjuntoTDA c = new Conjunto();
 		c.inicializar();
 		if(n != null) {
 			NodoValor aux = n.valores;
@@ -128,7 +128,7 @@ public class DiccionarioMultipleDin implements DiccionarioMultipleTDA {
 
 	@Override
 	public ConjuntoTDA claves() {
-		ConjuntoTDA c = new ImpConjunto();
+		ConjuntoTDA c = new Conjunto();
 		c.inicializar();
 		NodoClave aux = origen;
 		while( aux != null) {

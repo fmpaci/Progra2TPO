@@ -4,7 +4,7 @@ package algoritmos;
 public class TestConjunto {
 	
 	public static void main(String[] args) {
-		implementaciones.ImpConjunto conjHandle = new implementaciones.ImpConjunto();
+		implementaciones.Conjunto conjHandle = new implementaciones.Conjunto();
 		
 		conjHandle.inicializar();
 		conjHandle.agregar("1");

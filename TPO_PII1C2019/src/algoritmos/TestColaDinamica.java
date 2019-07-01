@@ -3,7 +3,7 @@ package algoritmos;
 public class TestColaDinamica {
 
 	public static void main(String[] args) {
-		implementaciones.ImpCola cola = new implementaciones.ImpCola();
+		implementaciones.Cola cola = new implementaciones.Cola();
 		cola.inicilizar();
 		cola.acolar("Este");
 		cola.acolar("es");

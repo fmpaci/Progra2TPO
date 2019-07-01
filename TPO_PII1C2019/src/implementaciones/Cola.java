@@ -2,7 +2,7 @@ package implementaciones;
 
 import tdas.ColaTDA;
 
-public class ImpCola implements ColaTDA {
+public class Cola implements ColaTDA {
 	
 	public class NodoCola {
 		String valor;
@@ -45,7 +45,8 @@ public class ImpCola implements ColaTDA {
 
 	@Override
 	public String primero() {
-		return primero.valor;
+		if (primero == null) return null;
+		else return primero.valor;
 	}
 
 	@Override

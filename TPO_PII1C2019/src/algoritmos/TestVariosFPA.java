@@ -1,37 +1,49 @@
 package algoritmos;
 
+import org.junit.Assert;
+
+import implementaciones.AgendaCitas;
 import tdas.ConjuntoTDA;
 
 public class TestVariosFPA {
 
 	public static void main(String[] args) {
-		implementaciones.ImpAgendaCitas citas = new implementaciones.ImpAgendaCitas();
-		ConjuntoTDA abogados = new implementaciones.ImpConjunto();
-		String aux = "lol";
-		//aux = null;
-		abogados.inicializar();
+		implementaciones.AgendaCitas citas = new implementaciones.AgendaCitas();
+		IAlgoritmo algo = new Algoritmo(); 
 		citas.inicializar();
 		
-		citas.agregarNuevoDia("Alberto", "hoy", "23/06/2019");
-		citas.agregarNuevoDia("Alberto", "mañana", "24/06/2019");
-		citas.agregarNuevoDia("Juan", "hoy", "23/06/2019");
-		citas.agregarNuevoDia("Juan", "mañana", "24/06/2019");
-		citas.agregarNuevoDia("pedro", "hoy", "23/06/2019");
-		citas.agregarNuevoDia("Ramon", "hoy", "23/06/2019");
-		citas.agregarNuevoDia("Jose", "hoy", "23/06/2019");
-		citas.agregarNuevoDia("Matias", "hoy", "23/06/2019");
+		Algoritmo algoritmo = new Algoritmo();
+		AgendaCitas agenda = new AgendaCitas();
+		agenda.inicializar();
 		
-		citas.eliminarAbogado("pedro");
-		abogados = citas.abogados();
-		
-		while(!abogados.conjuntoVacio()){
-			aux = abogados.elegir();
-			System.out.println(aux);
-			abogados.sacar(aux);
-		}
-		System.out.println("Terminado");
-		
+		/*
+		agenda.agregarNuevoDia("un abogado", "martes", "2019/01/01");
+		agenda.agregarNuevaCita("un abogado", "2019/01/01", "09:00", "un cliente");
+		agenda.agregarNuevaCita("un abogado", "2019/01/01", "09:30", "un cliente");
+		agenda.agregarNuevoDia("un abogado", "lunes", "2018/12/31");
+		agenda.agregarNuevaCita("un abogado", "2018/12/31", "11:30", "un cliente");
+		agenda.agregarNuevaCita("un abogado", "2018/12/31", "10:30", "otro cliente");
+		String[] primeraReunionEsperada = new String[] { "un abogado", "2018/12/31", "11:30" };
+		String[] segundaReunionEsperada = new String[] { "un abogado", "2019/01/01", "09:00" };
+		String[] terceraReunionEsperada = new String[] { "un abogado", "2019/01/01", "09:30" };
+*/
+		// Operación
+		String[][] reuniones = algoritmo.conQuienSeReunio(agenda, "un cliente");
 
+		System.out.println(reuniones.length);
+		/*
+		System.out.println(reuniones[0][0]);
+		System.out.println(reuniones[0][1]);
+		System.out.println(reuniones[0][2]);
+		
+		System.out.println(reuniones[1][0]);
+		System.out.println(reuniones[1][1]);
+		System.out.println(reuniones[1][2]);
+		
+		System.out.println(reuniones[2][0]);
+		System.out.println(reuniones[2][1]);
+		System.out.println(reuniones[2][2]);
+	*/
 	}
 	
 
