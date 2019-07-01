@@ -1,4 +1,6 @@
 package algoritmos;
+import java.util.Arrays;
+
 import tdas.AgendaCitasTDA;
 import tdas.ConjuntoTDA;
 import tdas.ColaPrioridadTDA;
@@ -35,6 +37,17 @@ public class TestAgendaCitas {
 		System.out.println(algo.sumarDia("2019/11/30"));
 		System.out.println(algo.sumarDia("2019/12/01"));
 		System.out.println(algo.sumarDia("2019/12/31"));
+		System.out.println("--");
+		for (String[] dias : algo.diasSemana("2019/01/28") ) {
+			for (String dia : dias) {
+				System.out.println(dia);
+			}
+		}
+		String[][] dias = algo.diasSemana("2019/01/28");
+		System.out.println(Arrays.asList(dias[0]).contains("2019/02/03"));
+		System.out.println(Arrays.asList(dias[1]).contains("miercoles"));
+		Integer index = Arrays.asList(dias[0]).indexOf("2019/02/01");
+		System.out.println(dias[0][index] + " - " + dias[1][index]);
 		/*
 		AgendaCitasTDA citas = new implementaciones.AgendaCitas();
 		ConjuntoTDA abogados = new implementaciones.Conjunto();

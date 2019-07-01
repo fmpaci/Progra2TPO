@@ -4,6 +4,9 @@ import tdas.AgendaCitasTDA;
 import tdas.ColaPrioridadTDA;
 import tdas.ColaTDA;
 import tdas.ConjuntoTDA;
+
+import java.util.Arrays;
+
 import implementaciones.Conjunto;
 
 public class Algoritmo implements IAlgoritmo {
@@ -83,7 +86,16 @@ public class Algoritmo implements IAlgoritmo {
 
 	@Override
 	public String[][] obtenerCitas(AgendaCitasTDA agenda, String abogado, String fecha) {
-		// TODO Auto-generated method stub
+		String[][] citas = new String[30][3];
+		String[][] rangoDias = diasSemana(fecha);
+		ConjuntoTDA fechas = agenda.fechas(abogado);
+		while (!fechas.conjuntoVacio()) {
+			String auxFecha = fechas.elegir();
+			fechas.sacar(auxFecha);
+			if (Arrays.asList(rangoDias[0]).contains(auxFecha)) {
+				
+			}
+		}
 		return null;
 	}
 
@@ -97,6 +109,19 @@ public class Algoritmo implements IAlgoritmo {
 	public ColaPrioridadTDA libresTotal(AgendaCitasTDA agenda, String fecha) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	protected String[][] diasSemana(String fechaDesde) {
+		String[][] fechas = new String[2][7];
+		String nuevaFecha = fechaDesde;
+		String nuevoDia = "lunes";
+		for (int i = 0; i < 7; i++) {
+			fechas[0][i] = nuevaFecha;
+			fechas[1][i] = nuevoDia;
+			nuevoDia = siguienteDiaSemana(nuevoDia);
+			nuevaFecha = sumarDia(nuevaFecha);
+		}
+		return fechas;
 	}
 	
 	protected String sumarDia(String fecha) {
