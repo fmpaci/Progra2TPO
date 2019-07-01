@@ -7,6 +7,35 @@ import tdas.ColaTDA;
 public class TestAgendaCitas {
 
 	public static void main(String[] args) {
+		Algoritmo algo = new Algoritmo();
+		System.out.println(algo.sumarDia("2019/01/01"));
+		System.out.println(algo.sumarDia("2019/01/29"));
+		System.out.println(algo.sumarDia("2019/01/30"));
+		System.out.println(algo.sumarDia("2019/01/31"));
+		System.out.println(algo.sumarDia("2019/02/01"));
+		System.out.println(algo.sumarDia("2019/02/28"));
+		System.out.println(algo.sumarDia("2019/03/01"));
+		System.out.println(algo.sumarDia("2019/03/30"));
+		System.out.println(algo.sumarDia("2019/03/31"));
+		System.out.println(algo.sumarDia("2019/04/01"));
+		System.out.println(algo.sumarDia("2019/04/30"));
+		System.out.println(algo.sumarDia("2019/05/01"));
+		System.out.println(algo.sumarDia("2019/05/31"));
+		System.out.println(algo.sumarDia("2019/06/01"));
+		System.out.println(algo.sumarDia("2019/06/30"));
+		System.out.println(algo.sumarDia("2019/07/01"));
+		System.out.println(algo.sumarDia("2019/07/31"));
+		System.out.println(algo.sumarDia("2019/08/01"));
+		System.out.println(algo.sumarDia("2019/08/31"));
+		System.out.println(algo.sumarDia("2019/09/01"));
+		System.out.println(algo.sumarDia("2019/09/30"));
+		System.out.println(algo.sumarDia("2019/10/01"));
+		System.out.println(algo.sumarDia("2019/10/31"));
+		System.out.println(algo.sumarDia("2019/11/01"));
+		System.out.println(algo.sumarDia("2019/11/30"));
+		System.out.println(algo.sumarDia("2019/12/01"));
+		System.out.println(algo.sumarDia("2019/12/31"));
+		/*
 		AgendaCitasTDA citas = new implementaciones.AgendaCitas();
 		ConjuntoTDA abogados = new implementaciones.Conjunto();
 		ConjuntoTDA fechas = new implementaciones.Conjunto();
@@ -46,8 +75,13 @@ public class TestAgendaCitas {
 		citas.agregarNuevaCita("juan", "23/06/2019", "1500", "Cliente4");
 		citas.agregarNuevaCita("Pedro", "23/06/2019", "1000", "Cliente5");
 		citas.agregarNuevaCita("Ramon", "24/06/2019", "1030", "Cliente6");
+<<<<<<< HEAD
 		
 		/*Prueba de conjunto Fechas*/
+=======
+		*/
+		/*Prueba de conjunto Fechas
+>>>>>>> 168987e37154210a2968119fe73f89aeb4c87921
 		fechas = citas.fechas("Alberto");
 		while(!fechas.conjuntoVacio()) {
 			aux = fechas.elegir();
@@ -109,13 +143,13 @@ public class TestAgendaCitas {
 		}//cliente1}
 		*/
 
-		System.out.println("-----------------------------------------------------");
+		//System.out.println("-----------------------------------------------------");
 		//citas.eliminarAbogado("pedro");
 		//citas.eliminarAbogado("alberto");
 		//citas.eliminarAbogado("ramon");
-		abogados = citas.abogados();
+		//abogados = citas.abogados();
 		
-		
+		/*
 		while(!abogados.conjuntoVacio()){
 			aux = abogados.elegir();
 			System.out.println(aux);
@@ -124,7 +158,7 @@ public class TestAgendaCitas {
 		
 		
 		System.out.println("Terminado");
-		
+		*/
 		
 
 	}

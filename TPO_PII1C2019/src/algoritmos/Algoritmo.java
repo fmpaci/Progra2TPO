@@ -99,4 +99,63 @@ public class Algoritmo implements IAlgoritmo {
 		return null;
 	}
 	
+	protected String sumarDia(String fecha) {
+		String[] auxFecha = fecha.split("/");
+		Integer anio = Integer.parseInt(auxFecha[0]);
+		Integer mes = Integer.parseInt(auxFecha[1]);
+		Integer dia = Integer.parseInt(auxFecha[2]);
+		
+		if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {
+			if (dia < 30) {
+				dia += 1; 
+			} else {
+				dia = 1;
+				mes += 1;
+			}
+		} else if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) {
+			if (dia < 31) {
+				dia += 1;
+			} else {
+				dia = 1;
+				if (mes < 12) {
+					mes += 1;
+				} else {
+					mes = 1;
+					anio += 1;
+				}
+			}
+		} else {
+			if (dia < 28) {
+				dia += 1;
+			} else {
+				dia = 1;
+				mes = 3;
+			}
+		}
+		
+		String nuevaFecha = anio.toString();
+		if (mes.toString().length() == 1) {
+			nuevaFecha += "/0" + mes.toString();
+		} else {
+			nuevaFecha += "/" + mes.toString();
+		}
+		if (dia.toString().length() == 1) {
+			nuevaFecha += "/0" + dia.toString();
+		} else {
+			nuevaFecha += "/" + dia.toString();
+		}
+		
+		return nuevaFecha;
+	}
+	
+	protected String siguienteDiaSemana(String diaSemana) {
+		if (diaSemana == "lunes") return "martes";
+		if (diaSemana == "martes") return "miercoles";
+		if (diaSemana == "miercoles") return "jueves";
+		if (diaSemana == "jueves") return "viernes";
+		if (diaSemana == "viernes") return "sábado";
+		if (diaSemana == "sábado") return "domingo";
+		if (diaSemana == "domingo") return "lunes";
+		return null;
+	}
 }
