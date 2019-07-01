@@ -7,6 +7,7 @@ import tdas.ConjuntoTDA;
 
 import java.util.Arrays;
 
+import implementaciones.Cola;
 import implementaciones.Conjunto;
 
 public class Algoritmo implements IAlgoritmo {
@@ -114,8 +115,47 @@ public class Algoritmo implements IAlgoritmo {
 
 	@Override
 	public String[][] conQuienSeReunio(AgendaCitasTDA agenda, String cliente) {
-		// TODO Auto-generated method stub
-		return null;
+		ConjuntoTDA abogados = new Conjunto();
+		ConjuntoTDA fechas = new Conjunto();
+		ColaTDA turnos = new Cola();
+		String nombreAbogado;
+		String fechaTurno;
+		String horaTurno;
+		String auxCliente;
+		String[][] reunido = new String[1000][3];
+		int i = 0;
+				
+		abogados = agenda.abogados();
+
+		
+		if (abogados.conjuntoVacio())
+			return new String[][] { {} };
+
+		
+		while(!abogados.conjuntoVacio()) {
+			nombreAbogado = abogados.elegir();
+			fechas = agenda.fechas(nombreAbogado);
+			while(!fechas.conjuntoVacio()) {
+				fechaTurno = fechas.elegir();
+				fechas.sacar(fechaTurno);
+				turnos = agenda.turnos(nombreAbogado, fechaTurno);
+				while(!turnos.colaVacia()) {
+					horaTurno = turnos.primero();
+					auxCliente = agenda.clienteEnCita(nombreAbogado, fechaTurno, horaTurno);
+					if(auxCliente.equalsIgnoreCase(cliente)) {
+						reunido[i][0] = nombreAbogado;
+						reunido[i][1] = horaTurno;
+						reunido[i][2] = fechaTurno;
+						i += 1;
+					}
+					turnos.desacolar();
+				}
+				fechas.sacar(fechaTurno);
+			}
+			abogados.sacar(nombreAbogado);
+		}
+		
+		return reunido;
 	}
 
 	@Override
