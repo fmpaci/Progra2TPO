@@ -8,6 +8,7 @@ public class TestAgendaCitas {
 
 	public static void main(String[] args) {
 		Algoritmo algo = new Algoritmo();
+		
 		System.out.println(algo.sumarDia("2019/01/01"));
 		System.out.println(algo.sumarDia("2019/01/29"));
 		System.out.println(algo.sumarDia("2019/01/30"));
@@ -78,8 +79,7 @@ public class TestAgendaCitas {
 <<<<<<< HEAD
 		
 		/*Prueba de conjunto Fechas*/
-=======
-		*/
+
 		/*Prueba de conjunto Fechas
 >>>>>>> 168987e37154210a2968119fe73f89aeb4c87921
 		fechas = citas.fechas("Alberto");
@@ -91,7 +91,7 @@ public class TestAgendaCitas {
 		
 		
 		
-		/*Prueba de Cola de turnos*/
+		/*Prueba de Cola de turnos
 		cola = citas.turnos("Alberto", "24/06/2019");
 		
 		while(!cola.colaVacia()) {
@@ -99,7 +99,7 @@ public class TestAgendaCitas {
 			cola.desacolar();
 		}
 		
-		
+		*/
 		
 		/*
 		citas.eliminarFecha("Alberto", "24/06/2019");
