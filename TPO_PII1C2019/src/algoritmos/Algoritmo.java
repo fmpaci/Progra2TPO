@@ -89,14 +89,27 @@ public class Algoritmo implements IAlgoritmo {
 		String[][] citas = new String[30][3];
 		String[][] rangoDias = diasSemana(fecha);
 		ConjuntoTDA fechas = agenda.fechas(abogado);
+		Integer i = 0;
 		while (!fechas.conjuntoVacio()) {
 			String auxFecha = fechas.elegir();
 			fechas.sacar(auxFecha);
 			if (Arrays.asList(rangoDias[0]).contains(auxFecha)) {
-				
+				Integer idxRangoDia = Arrays.asList(rangoDias[0]).indexOf(auxFecha);
+				ColaTDA turnos = agenda.turnos(abogado, auxFecha);
+				while (!turnos.colaVacia()) {
+					String hora = turnos.primero();
+					turnos.desacolar();
+					String cliente = agenda.clienteEnCita(abogado, auxFecha, hora);
+					String nombreDia = rangoDias[1][idxRangoDia];
+					citas[i] = new String[]{ nombreDia, hora, cliente };
+					i++;
+				}
 			}
 		}
-		return null;
+		
+		String[][] compacto = compactarArreglo(citas);
+		ordenarArreglo(compacto, 0, 1);
+		return compacto;
 	}
 
 	@Override
@@ -109,6 +122,41 @@ public class Algoritmo implements IAlgoritmo {
 	public ColaPrioridadTDA libresTotal(AgendaCitasTDA agenda, String fecha) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	protected void ordenarArreglo(String[][] arreglo, Integer ordenarPor1, Integer ordenarPor2) {  
+	    for (int i = 1; i < arreglo.length; i++) {
+	        String[] current = arreglo[i];
+	        String clave = current[ordenarPor1] + current[ordenarPor2];
+	        int j = i - 1;
+	        while(j >= 0 && clave.compareToIgnoreCase(arreglo[j][ordenarPor1] + arreglo[j][ordenarPor2]) < 0) {
+	            arreglo[j+1] = arreglo[j];
+	            j--;
+	        }
+	        arreglo[j+1] = current;
+	    }
+	}
+	
+	protected String[][] compactarArreglo(String[][] arreglo) {
+		Integer conteo = 0;
+		Integer ancho = arreglo[0].length;
+		for (String[] fila : arreglo) {
+			if (fila[0] != null) {
+				conteo += 1;
+			}
+		}
+		
+		if (conteo == 0) return new String[0][0];
+		
+		String[][] compacto = new String[conteo][ancho];
+		Integer i = 0;
+		for (String[] fila : arreglo) {
+			if (fila[0] != null) {
+				compacto[i] = fila;
+				i++;
+			}
+		}
+		return compacto;
 	}
 	
 	protected String[][] diasSemana(String fechaDesde) {
