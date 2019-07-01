@@ -219,7 +219,7 @@ public class ImpAgendaCitas implements AgendaCitasTDA {
 	}
 	
 	private String clienteCitado(ArbolCitasTDA nArbol, String hora) {
-		if(nArbol.hora() == hora) {
+		if(hora.equalsIgnoreCase(nArbol.hora())) {
 			return nArbol.cliente();
 		}
 		if(Integer.valueOf(nArbol.hora()) < Integer.valueOf(hora)) {
