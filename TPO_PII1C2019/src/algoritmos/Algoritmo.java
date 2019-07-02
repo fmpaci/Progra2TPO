@@ -312,8 +312,8 @@ public class Algoritmo implements IAlgoritmo {
 		if (diaSemana == "martes") return "miercoles";
 		if (diaSemana == "miercoles") return "jueves";
 		if (diaSemana == "jueves") return "viernes";
-		if (diaSemana == "viernes") return "s�bado";
-		if (diaSemana == "s�bado") return "domingo";
+		if (diaSemana == "viernes") return "sabado";
+		if (diaSemana == "sabado") return "domingo";
 		if (diaSemana == "domingo") return "lunes";
 		return null;
 	}
