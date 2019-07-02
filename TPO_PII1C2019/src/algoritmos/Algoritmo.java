@@ -129,11 +129,7 @@ public class Algoritmo implements IAlgoritmo {
 				
 		abogados = agenda.abogados();
 
-		
-		/*if (abogados.conjuntoVacio())
-			return new String[][] { {} };
-*/
-		
+			
 		while(!abogados.conjuntoVacio()) {
 			nombreAbogado = abogados.elegir();
 			fechas = agenda.fechas(nombreAbogado);
@@ -157,49 +153,59 @@ public class Algoritmo implements IAlgoritmo {
 			abogados.sacar(nombreAbogado);
 		}
 		
-		return compactarArreglo(reunido);
+		if (reunido.length>0) {
+			ordenarArreglo(reunido,1,2);
+			return compactarArreglo(reunido);
+		}else
+			return compactarArreglo(reunido);
 	}
 
 	@Override
 	public ColaPrioridadTDA libresTotal(AgendaCitasTDA agenda, String fecha) {
-<<<<<<< HEAD
-		return null;
-		
-	}
-=======
 		ConjuntoTDA abogados = new Conjunto();
-		ConjuntoTDA fechas = new Conjunto();
-		ColaPrioridadTDA horariosLibres = new ColaPrioridad();
-		Integer contador = 5;
+		ConjuntoTDA fechas = new Conjunto(); //conjunto de fechas a evaluar
+		ConjuntoTDA fechasXAbogado = new Conjunto(); //conjunto de las fechas de un abogado
+		ColaPrioridadTDA horariosLibres = new ColaPrioridad(); //cola que va a devolver
+		
 		abogados.inicializar();
 		abogados = agenda.abogados();
 		fechas.inicializar();
 		horariosLibres.inicializar();
-		while(contador != 0) {
-			fechas.agregar(fecha);
-			fecha = sumarDia(fecha);
-			contador -= 1;	
-		}
+
 		while(!abogados.conjuntoVacio()) {
 			String abogado = abogados.elegir();
-			abogados.sacar(abogado);
+			String fechaAux = fecha;
+			int contador = 5;
+			while(contador != 0) {//crear las fechas de la semana para evaluarlas
+				fechas.agregar(fechaAux);
+				fechaAux = sumarDia(fechaAux);
+				contador -= 1;	
+			}
 			while(!fechas.conjuntoVacio()) {
 				String dia = fechas.elegir();
-				fechas.sacar(dia);
-				ColaTDA todosTurnos = horariosTurnos();
-				if(agenda.existeCita(abogado, dia, todosTurnos.primero()) == false) {
-					horariosLibres.acolar(abogado, todosTurnos.primero());
-					todosTurnos.desacolar();
-				}else {
-					todosTurnos.desacolar();
-				}		
+				fechasXAbogado = agenda.fechas(abogado);
+				while(!fechasXAbogado.conjuntoVacio()) {
+					String hoy = fechasXAbogado.elegir();
+					
+					if(hoy.equals(dia)) {
+						ColaTDA todosTurnos = horariosTurnos();
+						while(!todosTurnos.colaVacia()) {
+							if(agenda.existeCita(abogado, dia, todosTurnos.primero()) == false) {
+								horariosLibres.acolar(abogado, todosTurnos.primero());
+							}
+							todosTurnos.desacolar();
+						}
+					}
+					fechasXAbogado.sacar(hoy);
+				}
+				fechas.sacar(dia);	
 			}
+			abogados.sacar(abogado);
 		}
 		return horariosLibres;
-}
+	}
 
 
->>>>>>> ba070009f75bcdbacd747d3116d77fc936bf8cef
 	
 	
 	
@@ -315,6 +321,24 @@ public class Algoritmo implements IAlgoritmo {
 	protected ColaTDA horariosTurnos() {
 		ColaTDA horarios = new Cola();
 		horarios.inicilizar();
+		horarios.acolar("00:00");
+		horarios.acolar("00:30");
+		horarios.acolar("01:00");
+		horarios.acolar("01:30");
+		horarios.acolar("02:00");
+		horarios.acolar("02:30");
+		horarios.acolar("03:00");
+		horarios.acolar("03:30");
+		horarios.acolar("04:00");
+		horarios.acolar("04:30");
+		horarios.acolar("05:00");
+		horarios.acolar("05:30");
+		horarios.acolar("06:00");
+		horarios.acolar("06:30");
+		horarios.acolar("07:00");
+		horarios.acolar("07:30");
+		horarios.acolar("08:00");
+		horarios.acolar("08:30");
 		horarios.acolar("09:00");
 		horarios.acolar("09:30");
 		horarios.acolar("10:00");
@@ -334,7 +358,17 @@ public class Algoritmo implements IAlgoritmo {
 		horarios.acolar("17:00");
 		horarios.acolar("17:30");
 		horarios.acolar("18:00");
-		horarios.acolar("18:30");			
+		horarios.acolar("18:30");
+		horarios.acolar("19:00");
+		horarios.acolar("19:30");
+		horarios.acolar("20:00");
+		horarios.acolar("20:30");
+		horarios.acolar("21:00");
+		horarios.acolar("21:30");
+		horarios.acolar("22:00");
+		horarios.acolar("22:30");
+		horarios.acolar("23:00");
+		horarios.acolar("23:30");
 		return horarios;	
 	}
 	

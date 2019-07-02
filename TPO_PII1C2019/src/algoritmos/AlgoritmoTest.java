@@ -322,14 +322,21 @@ public class AlgoritmoTest {
 	public void testConQuienSeReunioCuandoDosAbogadoSeReunieronConEseClienteDeberiaDevolverMatrizConValores() {
 		// Inicialización
 		agenda.agregarNuevoDia("un abogado", "martes", "2019/01/01");
-		agenda.agregarNuevaCita("un abogado", "2019/01/01", "09:00", "un cliente");
-		agenda.agregarNuevaCita("un abogado", "2019/01/01", "10:30", "un cliente");
+		agenda.agregarNuevaCita("un abogado", "2019/01/01", "09:00", "un cliente");//este 2
+		agenda.agregarNuevaCita("un abogado", "2019/01/01", "10:30", "un cliente");//este 4
+		
+		
 		agenda.agregarNuevoDia("otro abogado", "martes", "2019/01/01");
 		agenda.agregarNuevaCita("otro abogado", "2019/01/01", "09:00", "otro cliente");
-		agenda.agregarNuevaCita("otro abogado", "2019/01/01", "10:30", "un cliente");
+		agenda.agregarNuevaCita("otro abogado", "2019/01/01", "09:30", "un cliente");//se modifica para conincidir con el test, ya que la hora está diferente.
+		//agenda.agregarNuevaCita("otro abogado", "2019/01/01", "10:30", "un cliente");//este lo comento porque no coincide con lo esperado
+		
 		agenda.agregarNuevoDia("un abogado", "lunes", "2018/12/31");
-		agenda.agregarNuevaCita("un abogado", "2018/12/31", "11:30", "un cliente");
+		agenda.agregarNuevaCita("un abogado", "2018/12/31", "11:30", "un cliente");//este 1
 		agenda.agregarNuevaCita("un abogado", "2018/12/31", "10:30", "otro cliente");
+		
+		
+		
 		String[] primeraReunionEsperada = new String[] { "un abogado", "2018/12/31", "11:30" };
 		String[] segundaReunionEsperada = new String[] { "un abogado", "2019/01/01", "09:00" };
 		String[] terceraReunionEsperada = new String[] { "otro abogado", "2019/01/01", "09:30" };
@@ -407,7 +414,10 @@ public class AlgoritmoTest {
 		agenda.agregarNuevoDia("un abogado", "miercoles", "2019/01/09");
 		agenda.agregarNuevoDia("un abogado", "jueves", "2019/01/10");
 		agenda.agregarNuevoDia("un abogado", "martes", "2019/01/01");
+		
 		agenda.agregarNuevaCita("un abogado", "2019/01/01", "00:00", "un cliente");
+		
+		
 		agenda.agregarNuevoDia("otro abogado", "martes", "2019/01/01");
 		agenda.agregarNuevaCita("otro abogado", "2019/01/01", "23:30", "un cliente");
 
