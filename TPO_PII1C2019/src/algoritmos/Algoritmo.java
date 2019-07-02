@@ -8,6 +8,7 @@ import tdas.ConjuntoTDA;
 import java.util.Arrays;
 
 import implementaciones.Cola;
+import implementaciones.ColaPrioridad;
 import implementaciones.Conjunto;
 
 public class Algoritmo implements IAlgoritmo {
@@ -128,9 +129,9 @@ public class Algoritmo implements IAlgoritmo {
 		abogados = agenda.abogados();
 
 		
-		if (abogados.conjuntoVacio())
+		/*if (abogados.conjuntoVacio())
 			return new String[][] { {} };
-
+*/
 		
 		while(!abogados.conjuntoVacio()) {
 			nombreAbogado = abogados.elegir();
@@ -144,8 +145,8 @@ public class Algoritmo implements IAlgoritmo {
 					auxCliente = agenda.clienteEnCita(nombreAbogado, fechaTurno, horaTurno);
 					if(auxCliente.equalsIgnoreCase(cliente)) {
 						reunido[i][0] = nombreAbogado;
-						reunido[i][1] = horaTurno;
-						reunido[i][2] = fechaTurno;
+						reunido[i][1] = fechaTurno;
+						reunido[i][2] = horaTurno;
 						i += 1;
 					}
 					turnos.desacolar();
@@ -155,14 +156,17 @@ public class Algoritmo implements IAlgoritmo {
 			abogados.sacar(nombreAbogado);
 		}
 		
-		return reunido;
+		return compactarArreglo(reunido);
 	}
 
 	@Override
 	public ColaPrioridadTDA libresTotal(AgendaCitasTDA agenda, String fecha) {
-		// TODO Auto-generated method stub
 		return null;
+		
 	}
+	
+	
+	
 	
 	protected void ordenarArreglo(String[][] arreglo, Integer ordenarPor1, Integer ordenarPor2) {  
 	    for (int i = 1; i < arreglo.length; i++) {

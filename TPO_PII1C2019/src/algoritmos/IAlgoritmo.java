@@ -37,7 +37,7 @@ public interface IAlgoritmo {
 	 * Obtener para un cliente determinado, la lista de todos los abogados con que se reunío junto con la fecha y la hora.
 	 * 
 	 * Debe devolver un arreglo conteniendo el nombre del abogado, la fecha y la hora y el cliente ordenado por
-	 * día de la semana y horario.  
+	 * día de la semana y horario. 
 	 * */
 	public String[][] conQuienSeReunio(AgendaCitasTDA agenda, String cliente);
 	
