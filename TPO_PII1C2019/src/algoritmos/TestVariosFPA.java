@@ -1,6 +1,6 @@
 package algoritmos;
 
-//import org.junit.Assert;
+import org.junit.Assert;
 
 import implementaciones.AgendaCitas;
 import implementaciones.ColaPrioridad;
