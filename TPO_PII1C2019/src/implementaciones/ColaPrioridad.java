@@ -10,11 +10,11 @@ public class ColaPrioridad implements ColaPrioridadTDA {
 		NodoPrioridad sig;
 	}
 	
-	NodoPrioridad mayorPrioridad;
+	NodoPrioridad nPrioridad;
 	
 	@Override
 	public void inicializar() {
-		mayorPrioridad = null;
+		nPrioridad = null;
 		
 	}
 
@@ -24,11 +24,11 @@ public class ColaPrioridad implements ColaPrioridadTDA {
 		nuevo.valor = valor;
 		nuevo.prioridad = prioridad;
 		
-		if(mayorPrioridad == null || prioridad.compareToIgnoreCase(mayorPrioridad.prioridad) < 0 ) {
-			nuevo.sig = mayorPrioridad;
-			mayorPrioridad = nuevo;
+		if(nPrioridad == null || prioridad.compareToIgnoreCase(nPrioridad.prioridad) < 0 ) {
+			nuevo.sig = nPrioridad;
+			nPrioridad = nuevo;
 		}else {
-			NodoPrioridad aux = mayorPrioridad;
+			NodoPrioridad aux = nPrioridad;
 			while(aux.sig != null && prioridad.compareToIgnoreCase(aux.sig.prioridad)>=0) {
 				aux = aux.sig;
 			}
@@ -40,26 +40,26 @@ public class ColaPrioridad implements ColaPrioridadTDA {
 
 	@Override
 	public void desacolar() {
-		mayorPrioridad = mayorPrioridad.sig;
+		nPrioridad = nPrioridad.sig;
 		
 	}
 
 	@Override
 	public String primero() {
 		// TODO Auto-generated method stub
-		return mayorPrioridad.valor;
+		return nPrioridad.valor;
 	}
 
 	@Override
 	public String prioridad() {
 		// TODO Auto-generated method stub
-		return mayorPrioridad.prioridad;
+		return nPrioridad.prioridad;
 	}
 
 	@Override
 	public boolean colaVacia() {
 		// TODO Auto-generated method stub
-		return mayorPrioridad == null;
+		return nPrioridad == null;
 	}
 
 }

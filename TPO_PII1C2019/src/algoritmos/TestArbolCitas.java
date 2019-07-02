@@ -16,7 +16,7 @@ public class TestArbolCitas {
 		//arbol1.eliminar("930", "Alex");
 		//System.out.println(arbol1.toString());
 		System.out.println(arbol1.hora());
-		/*ArbolCitasTDA arbol2 = new ArbolCitas();
+		ArbolCitasTDA arbol2 = new ArbolCitas();
 		arbol2.inicializar();
 		arbol2.agregar("1330", "a");
 		arbol2.agregar("1000", "b");
@@ -44,7 +44,6 @@ public class TestArbolCitas {
 		System.out.println(arbol2);
 		arbol2.eliminar("1500", "x");
 		System.out.println(arbol2);
-		*/
 	}
-
 }
+

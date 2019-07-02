@@ -44,14 +44,29 @@ public class ArbolCitas implements ArbolCitasTDA {
 			}
 			else if(this.horaNumero().equals(horaCon) && this.cliente().equalsIgnoreCase(cliente) && !this.hijoIzquierdo().arbolVacio()) {	
 				String[] datos = this.mayor(this.hijoIzquierdo());
+//<<<<<<< HEAD
+				if (this.cliente().equalsIgnoreCase(cliente)) {
+					//System.out.println(cliente + " es cliente");
+					nArbol.hora = datos[0];
+					nArbol.cliente = datos[1];
+				}
+//=======
 				nArbol.hora = datos[0];
 				nArbol.cliente = datos[1];
+//>>>>>>> branch 'master' of https://github.com/fmpaci/Progra2TPO.git
 				this.hijoIzquierdo().eliminar(datos[0], datos[1]);
 			}
 			else if(this.horaNumero().equals(horaCon) && this.cliente().equalsIgnoreCase(cliente) && !this.hijoDerecho().arbolVacio()) {
 				String[] datos = this.menor(this.hijoDerecho());
+//<<<<<<< HEAD
+				if (this.cliente().equalsIgnoreCase(cliente)) {
+					nArbol.hora = datos[0];
+					nArbol.cliente = datos[1];
+				}
+//=======
 				nArbol.hora = datos[0];
 				nArbol.cliente = datos[1];
+//>>>>>>> branch 'master' of https://github.com/fmpaci/Progra2TPO.git
 				this.hijoDerecho().eliminar(datos[0], datos[1]);
 			}
 			else if(this.horaNumero() < horaCon) {

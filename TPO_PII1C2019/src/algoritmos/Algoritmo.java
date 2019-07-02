@@ -5,6 +5,7 @@ import tdas.ColaPrioridadTDA;
 import tdas.ColaTDA;
 import tdas.ConjuntoTDA;
 
+
 import java.util.Arrays;
 
 import implementaciones.Cola;
@@ -161,9 +162,44 @@ public class Algoritmo implements IAlgoritmo {
 
 	@Override
 	public ColaPrioridadTDA libresTotal(AgendaCitasTDA agenda, String fecha) {
+<<<<<<< HEAD
 		return null;
 		
 	}
+=======
+		ConjuntoTDA abogados = new Conjunto();
+		ConjuntoTDA fechas = new Conjunto();
+		ColaPrioridadTDA horariosLibres = new ColaPrioridad();
+		Integer contador = 5;
+		abogados.inicializar();
+		abogados = agenda.abogados();
+		fechas.inicializar();
+		horariosLibres.inicializar();
+		while(contador != 0) {
+			fechas.agregar(fecha);
+			fecha = sumarDia(fecha);
+			contador -= 1;	
+		}
+		while(!abogados.conjuntoVacio()) {
+			String abogado = abogados.elegir();
+			abogados.sacar(abogado);
+			while(!fechas.conjuntoVacio()) {
+				String dia = fechas.elegir();
+				fechas.sacar(dia);
+				ColaTDA todosTurnos = horariosTurnos();
+				if(agenda.existeCita(abogado, dia, todosTurnos.primero()) == false) {
+					horariosLibres.acolar(abogado, todosTurnos.primero());
+					todosTurnos.desacolar();
+				}else {
+					todosTurnos.desacolar();
+				}		
+			}
+		}
+		return horariosLibres;
+}
+
+
+>>>>>>> ba070009f75bcdbacd747d3116d77fc936bf8cef
 	
 	
 	
@@ -275,4 +311,31 @@ public class Algoritmo implements IAlgoritmo {
 		if (diaSemana == "domingo") return "lunes";
 		return null;
 	}
+
+	protected ColaTDA horariosTurnos() {
+		ColaTDA horarios = new Cola();
+		horarios.inicilizar();
+		horarios.acolar("09:00");
+		horarios.acolar("09:30");
+		horarios.acolar("10:00");
+		horarios.acolar("10:30");
+		horarios.acolar("11:00");
+		horarios.acolar("11:30");
+		horarios.acolar("12:00");
+		horarios.acolar("12:30");
+		horarios.acolar("13:00");
+		horarios.acolar("13:30");
+		horarios.acolar("14:00");
+		horarios.acolar("14:30");
+		horarios.acolar("15:00");
+		horarios.acolar("15:30");
+		horarios.acolar("16:00");
+		horarios.acolar("16:30");
+		horarios.acolar("17:00");
+		horarios.acolar("17:30");
+		horarios.acolar("18:00");
+		horarios.acolar("18:30");			
+		return horarios;	
+	}
+	
 }

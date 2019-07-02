@@ -2,7 +2,7 @@ package implementaciones;
 
 import tdas.ColaTDA;
 
-public class Cola implements ColaTDA {
+public class impCola implements ColaTDA {
 	
 	public class NodoCola {
 		String valor;
