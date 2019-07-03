@@ -153,10 +153,7 @@ public class Algoritmo implements IAlgoritmo {
 			abogados.sacar(nombreAbogado);
 		}
 		
-		if (reunido.length>0) {
 			ordenarArreglo(reunido,1,2);
-			return compactarArreglo(reunido);
-		}else
 			return compactarArreglo(reunido);
 	}
 
